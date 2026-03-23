@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Sud Odysseum — Burgers & Salades Méditerranéens | Montpellier</title>
     <meta name="description" content="Restaurant méditerranéen au cœur d'Odysseum, Montpellier. Burgers artisanaux, salades fraîcheur, tapas & desserts gourmands.">
+    <link rel="icon" href="https://lesudodysseum.fr/wp-content/uploads/2025/05/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #C8A96E;
             --gold-light: #E8D5A8;
             --terracotta: #C4704B;
             --olive: #6B7B3A;
-            --olive-dark: #4A5628;
             --cream: #FBF7F0;
             --warm-white: #FEFCF9;
             --charcoal: #2B2B2B;
@@ -23,11 +23,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', 'Inter', sans-serif;
             color: var(--text);
             background: var(--warm-white);
             overflow-x: hidden;
@@ -39,45 +38,45 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1rem 2rem;
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.4s ease;
         }
         nav.scrolled {
-            background: rgba(43,43,43,0.95);
+            background: rgba(255,255,255,0.97);
             backdrop-filter: blur(20px);
-            padding: 0.7rem 2rem;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+            padding: 0.7rem 3rem;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
         }
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 1px;
+        .nav-logo img {
+            height: 44px;
+            transition: 0.3s;
         }
-        .nav-logo span { color: var(--gold); }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        nav.scrolled .nav-logo img {
+            height: 36px;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
         .nav-links a {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: color 0.3s;
         }
+        nav.scrolled .nav-links a { color: var(--charcoal); }
         .nav-links a:hover { color: var(--gold); }
         .nav-cta {
             background: var(--gold) !important;
             color: var(--charcoal) !important;
-            padding: 0.5rem 1.2rem;
-            border-radius: 4px;
-            font-weight: 600 !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 700 !important;
         }
-
+        nav.scrolled .nav-cta { color: var(--charcoal) !important; }
         .hamburger {
             display: none;
             flex-direction: column;
@@ -91,6 +90,7 @@
             background: #fff;
             transition: 0.3s;
         }
+        nav.scrolled .hamburger span { background: var(--charcoal); }
 
         /* ─── HERO ─── */
         .hero {
@@ -101,16 +101,17 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         }
-        .hero::before {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Terrasse.jpg') center/cover no-repeat;
+        }
+        .hero-bg::after {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(200,169,110,0.08)" stroke-width="0.5"/></svg>') center/600px repeat,
-                radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 30%, rgba(196,112,75,0.1) 0%, transparent 50%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 100%);
         }
         .hero-content {
             text-align: center;
@@ -118,36 +119,44 @@
             padding: 0 2rem;
             max-width: 900px;
         }
-        .hero-badge {
-            display: inline-block;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 0.4rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        .hero-logo {
+            height: 80px;
             margin-bottom: 2rem;
             animation: fadeUp 1s ease 0.3s both;
         }
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.5);
+            color: #fff;
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeUp 1s ease 0.4s both;
+        }
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
             color: #fff;
             line-height: 1.1;
             margin-bottom: 1.5rem;
+            letter-spacing: -1px;
             animation: fadeUp 1s ease 0.5s both;
         }
-        .hero h1 em {
-            color: var(--gold);
-            font-style: italic;
+        .hero h1 span {
+            color: var(--gold-light);
         }
         .hero p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
             line-height: 1.7;
             max-width: 600px;
             margin: 0 auto 2.5rem;
+            font-weight: 400;
             animation: fadeUp 1s ease 0.7s both;
         }
         .hero-buttons {
@@ -159,15 +168,16 @@
         }
         .btn {
             padding: 0.9rem 2.2rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            font-family: inherit;
         }
         .btn-primary {
             background: var(--gold);
@@ -176,27 +186,44 @@
         .btn-primary:hover {
             background: var(--gold-light);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(200,169,110,0.3);
+            box-shadow: 0 10px 30px rgba(200,169,110,0.4);
         }
         .btn-outline {
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 2px solid rgba(255,255,255,0.5);
             color: #fff;
             background: transparent;
         }
         .btn-outline:hover {
-            border-color: var(--gold);
-            color: var(--gold);
+            border-color: #fff;
+            background: rgba(255,255,255,0.1);
         }
         .hero-scroll {
             position: absolute;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255,255,255,0.4);
-            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.65rem;
+            font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
             animation: bounce 2s infinite;
+        }
+
+        /* ─── SECTION COMMON ─── */
+        .section-tag {
+            display: inline-block;
+            color: var(--terracotta);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         /* ─── CONCEPT ─── */
@@ -218,29 +245,22 @@
         .concept-img {
             width: 100%;
             aspect-ratio: 4/5;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--terracotta) 0%, var(--gold) 100%);
-            position: relative;
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative;
         }
-        .concept-img-text {
-            color: rgba(255,255,255,0.9);
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-style: italic;
-            text-align: center;
-            padding: 2rem;
-            line-height: 1.3;
+        .concept-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .concept-img::after {
             content: '';
             position: absolute;
             inset: 8px;
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
+            border-radius: 12px;
+            pointer-events: none;
         }
         .concept-stats {
             position: absolute;
@@ -249,35 +269,26 @@
             background: var(--charcoal);
             color: #fff;
             padding: 1.5rem 2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             display: flex;
             gap: 2rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
         .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--gold);
         }
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             opacity: 0.7;
-        }
-        .section-tag {
-            display: inline-block;
-            color: var(--terracotta);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
+            font-weight: 500;
         }
         .concept-text h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            line-height: 1.2;
+            font-size: 2.6rem;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
             color: var(--charcoal);
         }
@@ -285,20 +296,20 @@
             color: var(--text-light);
             line-height: 1.8;
             margin-bottom: 1.5rem;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
         }
         .concept-features {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
+            gap: 1rem;
             margin-top: 2rem;
         }
         .feature-item {
             display: flex;
             align-items: center;
             gap: 0.7rem;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.88rem;
+            font-weight: 600;
         }
         .feature-dot {
             width: 8px;
@@ -319,8 +330,7 @@
             margin: 0 auto 4rem;
         }
         .menu-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 1rem;
             color: var(--charcoal);
         }
@@ -333,43 +343,44 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
         .menu-card {
             background: #fff;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             transition: all 0.4s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.04);
         }
         .menu-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
         }
         .menu-card-img {
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            position: relative;
+            height: 240px;
+            overflow: hidden;
         }
-        .menu-card:nth-child(1) .menu-card-img { background: linear-gradient(135deg, #D4845A, #E8A87C); }
-        .menu-card:nth-child(2) .menu-card-img { background: linear-gradient(135deg, #6B7B3A, #9AB05F); }
-        .menu-card:nth-child(3) .menu-card-img { background: linear-gradient(135deg, #C8A96E, #E8D5A8); }
-        .menu-card:nth-child(4) .menu-card-img { background: linear-gradient(135deg, #8B4A6B, #C27BA0); }
+        .menu-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .menu-card:hover .menu-card-img img {
+            transform: scale(1.08);
+        }
         .menu-card-body {
-            padding: 1.8rem;
+            padding: 1.6rem;
         }
         .menu-card-body h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 0.7rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
             color: var(--charcoal);
         }
         .menu-card-body p {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             line-height: 1.6;
         }
         .menu-cta {
@@ -386,7 +397,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* ─── AMBIANCE (galerie) ─── */
+        /* ─── AMBIANCE ─── */
         .ambiance {
             padding: 8rem 2rem;
             background: var(--charcoal);
@@ -399,8 +410,7 @@
         }
         .ambiance-header .section-tag { color: var(--gold); }
         .ambiance-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 1rem;
         }
         .ambiance-header p {
@@ -412,47 +422,49 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 250px 250px;
-            gap: 1.5rem;
+            grid-template-rows: 260px 260px;
+            gap: 1.2rem;
         }
         .ambiance-item {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: rgba(255,255,255,0.9);
             cursor: pointer;
             transition: transform 0.4s ease;
         }
         .ambiance-item:hover { transform: scale(1.02); }
-        .ambiance-item:nth-child(1) {
-            grid-column: 1 / 3;
-            background: linear-gradient(135deg, #1a3a2a, #2d5a3d);
+        .ambiance-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
         }
-        .ambiance-item:nth-child(2) {
-            background: linear-gradient(135deg, #3d2b1f, #6b4c3b);
-        }
-        .ambiance-item:nth-child(3) {
-            background: linear-gradient(135deg, #2b3a4a, #4a6580);
-        }
-        .ambiance-item:nth-child(4) {
-            grid-column: 2 / 4;
-            background: linear-gradient(135deg, #4a3a2a, #7a6a5a);
-        }
+        .ambiance-item:hover img { transform: scale(1.08); }
         .ambiance-item::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.2);
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 60%);
             transition: 0.3s;
         }
-        .ambiance-item:hover::after { background: rgba(0,0,0,0.1); }
-        .ambiance-item span { z-index: 1; }
+        .ambiance-item:hover::after {
+            background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 60%);
+        }
+        .ambiance-item span {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 1.2rem;
+            z-index: 1;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        .ambiance-item:nth-child(1) {
+            grid-column: 1 / 3;
+        }
+        .ambiance-item:nth-child(4) {
+            grid-column: 2 / 4;
+        }
 
         /* ─── AVIS ─── */
         .reviews {
@@ -465,8 +477,7 @@
             margin: 0 auto 4rem;
         }
         .reviews-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 1rem;
             color: var(--charcoal);
         }
@@ -475,29 +486,30 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
         .review-card {
             background: #fff;
             padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.04);
         }
         .review-stars {
-            color: var(--gold);
-            font-size: 1rem;
             margin-bottom: 1rem;
+        }
+        .review-stars img {
+            height: 18px;
         }
         .review-card p {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             line-height: 1.7;
             font-style: italic;
             margin-bottom: 1.2rem;
         }
         .review-author {
-            font-weight: 600;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.82rem;
             color: var(--charcoal);
         }
 
@@ -515,8 +527,7 @@
             align-items: start;
         }
         .infos h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 2rem;
             color: var(--charcoal);
         }
@@ -524,8 +535,8 @@
             margin-bottom: 2rem;
         }
         .info-block h3 {
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.72rem;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--terracotta);
@@ -533,26 +544,54 @@
         }
         .info-block p, .info-block a {
             color: var(--text);
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             line-height: 1.8;
             text-decoration: none;
         }
         .info-block a:hover { color: var(--terracotta); }
-        .map-placeholder {
+        .map-container {
             width: 100%;
             height: 400px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #e8e0d4, #d4cbb8);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .footer-social {
             display: flex;
-            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: all 0.3s;
         }
-        .map-pin {
-            font-size: 2.5rem;
+        .footer-social a:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+        .social-dark a {
+            border-color: rgba(0,0,0,0.15);
+            color: var(--charcoal);
+        }
+        .social-dark a:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--charcoal);
         }
 
         /* ─── FOOTER ─── */
@@ -572,16 +611,19 @@
             padding-bottom: 3rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .footer-brand .nav-logo { font-size: 1.6rem; }
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: 0.8rem;
+        }
         .footer-brand p {
-            margin-top: 0.5rem;
             font-size: 0.85rem;
             max-width: 300px;
             line-height: 1.6;
         }
         .footer-links h4 {
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 1rem;
@@ -590,39 +632,17 @@
             display: block;
             color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             margin-bottom: 0.5rem;
             transition: color 0.3s;
         }
         .footer-links a:hover { color: var(--gold); }
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-        .footer-social a:hover {
-            border-color: var(--gold);
-            background: var(--gold);
-            color: var(--charcoal);
-        }
         .footer-bottom {
             max-width: 1200px;
             margin: 1.5rem auto 0;
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
         /* ─── BANNER PROSPECTION ─── */
@@ -640,17 +660,17 @@
             gap: 1.5rem;
             z-index: 9999;
             border-top: 2px solid var(--gold);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
         .prospect-banner strong { color: var(--gold); }
         .prospect-banner a {
             background: var(--gold);
             color: var(--charcoal);
             padding: 0.5rem 1.2rem;
-            border-radius: 4px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.78rem;
             letter-spacing: 1px;
             text-transform: uppercase;
             white-space: nowrap;
@@ -682,11 +702,13 @@
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: auto;
             }
+            .ambiance-item { min-height: 200px; }
             .ambiance-item:nth-child(1),
             .ambiance-item:nth-child(4) { grid-column: auto; }
-            .ambiance-item { min-height: 200px; }
         }
         @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            nav.scrolled { padding: 0.6rem 1.5rem; }
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .nav-links.open {
@@ -699,23 +721,24 @@
                 justify-content: center;
                 gap: 2rem;
             }
+            .nav-links.open a { color: #fff !important; font-size: 1rem; }
             .concept-inner,
             .infos-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .concept-stats { position: relative; bottom: 0; right: 0; margin-top: 1.5rem; }
-            .menu-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .reviews-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .concept-stats { position: relative; bottom: 0; right: 0; margin-top: 1.5rem; justify-content: center; }
+            .menu-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+            .reviews-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
             .ambiance-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.2rem; }
             .concept-text h2,
             .menu-header h2,
             .ambiance-header h2,
             .reviews-header h2,
-            .infos h2 { font-size: 2rem; }
-            .prospect-banner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            .infos h2 { font-size: 1.8rem; }
+            .prospect-banner { flex-direction: column; text-align: center; gap: 0.8rem; font-size: 0.82rem; }
             body { padding-bottom: 100px; }
         }
         @media (min-width: 769px) {
-            body { padding-bottom: 60px; }
+            body { padding-bottom: 55px; }
         }
     </style>
 </head>
@@ -723,7 +746,9 @@
 
 <!-- NAV -->
 <nav id="navbar">
-    <a href="#" class="nav-logo">Le <span>Sud</span></a>
+    <a href="#" class="nav-logo">
+        <img src="https://lesudodysseum.fr/wp-content/uploads/2025/05/le-sud-bleu.svg" alt="Le Sud Odysseum" id="navLogoImg">
+    </a>
     <ul class="nav-links" id="navLinks">
         <li><a href="#concept">Concept</a></li>
         <li><a href="#carte">La Carte</a></li>
@@ -739,9 +764,11 @@
 
 <!-- HERO -->
 <section class="hero">
+    <div class="hero-bg"></div>
     <div class="hero-content">
+        <img src="https://lesudodysseum.fr/wp-content/uploads/2025/05/le-sud-bleu.svg" alt="Le Sud" class="hero-logo" style="filter: brightness(0) invert(1);">
         <div class="hero-badge">Odysseum — Montpellier</div>
-        <h1>L'art de vivre<br><em>Méditerranéen</em></h1>
+        <h1>L'art de vivre<br><span>Méditerranéen</span></h1>
         <p>Burgers artisanaux, salades ensoleillées et tapas gourmands. Des produits nobles, des recettes inspirées du Sud, une terrasse baignée de lumière.</p>
         <div class="hero-buttons">
             <a href="#carte" class="btn btn-primary">Découvrir la Carte</a>
@@ -756,7 +783,7 @@
     <div class="concept-inner">
         <div class="concept-visual reveal">
             <div class="concept-img">
-                <div class="concept-img-text">Saveurs<br>du Sud</div>
+                <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Salle-Interieur.jpg" alt="Intérieur Le Sud Odysseum">
             </div>
             <div class="concept-stats">
                 <div>
@@ -793,28 +820,36 @@
     </div>
     <div class="menu-grid">
         <div class="menu-card reveal">
-            <div class="menu-card-img">🍔</div>
+            <div class="menu-card-img">
+                <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Burger.jpg" alt="Burger Le Sud">
+            </div>
             <div class="menu-card-body">
                 <h3>Burgers d'Exception</h3>
                 <p>Pain artisanal aux herbes, steaks de bœuf local, légumes grillés au soleil, fromages affinés et sauces maison.</p>
             </div>
         </div>
         <div class="menu-card reveal">
-            <div class="menu-card-img">🥗</div>
+            <div class="menu-card-img">
+                <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Salade.jpg" alt="Salade Le Sud">
+            </div>
             <div class="menu-card-body">
                 <h3>Salades Fraîcheur</h3>
                 <p>Tomates cerises, olives de Provence, feta onctueuse, huile d'olive première pression à froid.</p>
             </div>
         </div>
         <div class="menu-card reveal">
-            <div class="menu-card-img">🧆</div>
+            <div class="menu-card-img">
+                <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Tapas.jpg" alt="Tapas Le Sud">
+            </div>
             <div class="menu-card-body">
                 <h3>Tapas à Partager</h3>
                 <p>Onion rings croustillants, sticks de mozzarella fondants, wings marinées et jalapeños épicés.</p>
             </div>
         </div>
         <div class="menu-card reveal">
-            <div class="menu-card-img">🍰</div>
+            <div class="menu-card-img">
+                <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Dessert.jpg" alt="Dessert Le Sud">
+            </div>
             <div class="menu-card-body">
                 <h3>Gourmandises</h3>
                 <p>Pain perdu brioché, big cookie fondant, cheesecake aux fruits rouges et milkshakes généreux.</p>
@@ -834,10 +869,22 @@
         <p>Un cadre méditerranéen pensé pour savourer chaque instant, entre amis, en famille ou en amoureux.</p>
     </div>
     <div class="ambiance-grid reveal">
-        <div class="ambiance-item"><span>Terrasse Ensoleillée</span></div>
-        <div class="ambiance-item"><span>Décor Provençal</span></div>
-        <div class="ambiance-item"><span>Cuisine Ouverte</span></div>
-        <div class="ambiance-item"><span>Ambiance Conviviale</span></div>
+        <div class="ambiance-item">
+            <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Terrasse.jpg" alt="Terrasse">
+            <span>Terrasse Ensoleillée</span>
+        </div>
+        <div class="ambiance-item">
+            <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2PorteLeSud.jpg" alt="Entrée Le Sud">
+            <span>Entrée du Restaurant</span>
+        </div>
+        <div class="ambiance-item">
+            <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Tartare.jpg" alt="Tartare">
+            <span>Nos Créations</span>
+        </div>
+        <div class="ambiance-item">
+            <img src="https://lesudodysseum.fr/wp-content/uploads/2025/12/%E2%80%A2%E2%80%A2%E2%80%A2Salle-Interieur.jpg" alt="Salle intérieure">
+            <span>Ambiance Intérieure</span>
+        </div>
     </div>
 </section>
 
@@ -849,17 +896,17 @@
     </div>
     <div class="reviews-grid">
         <div class="review-card reveal">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars"><img src="https://lesudodysseum.fr/wp-content/uploads/2025/06/5stars.svg" alt="5 étoiles"></div>
             <p>"Les meilleurs burgers de Montpellier, sans hésitation. Les produits sont frais et l'accueil est top !"</p>
             <div class="review-author">— Sophie M.</div>
         </div>
         <div class="review-card reveal">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars"><img src="https://lesudodysseum.fr/wp-content/uploads/2025/06/5stars.svg" alt="5 étoiles"></div>
             <p>"La terrasse est un vrai bonheur. On se croirait en vacances. Les salades sont incroyables."</p>
             <div class="review-author">— Thomas R.</div>
         </div>
         <div class="review-card reveal">
-            <div class="review-stars">★★★★★</div>
+            <div class="review-stars"><img src="https://lesudodysseum.fr/wp-content/uploads/2025/06/5stars.svg" alt="5 étoiles"></div>
             <p>"Super concept, ambiance chaleureuse et plats généreux. On revient chaque semaine !"</p>
             <div class="review-author">— Léa D.</div>
         </div>
@@ -889,16 +936,15 @@
             </div>
             <div class="info-block">
                 <h3>Réseaux Sociaux</h3>
-                <div class="footer-social" style="margin-top:0.5rem;">
+                <div class="footer-social social-dark" style="margin-top:0.5rem;">
                     <a href="#">Fb</a>
                     <a href="#">Ig</a>
                 </div>
             </div>
         </div>
         <div class="reveal">
-            <div class="map-placeholder">
-                <div class="map-pin">📍</div>
-                <div>Centre Commercial Odysseum<br>Montpellier</div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.5!2d3.9191!3d43.6035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6ae326e3a4e8d%3A0x8a5e5b5a0e5e5e5e!2sCentre+Commercial+Odysseum!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -908,7 +954,7 @@
 <footer>
     <div class="footer-inner">
         <div class="footer-brand">
-            <a href="#" class="nav-logo">Le <span>Sud</span></a>
+            <img src="https://lesudodysseum.fr/wp-content/uploads/2025/05/le-sud-bleu.svg" alt="Le Sud" style="filter: brightness(0) invert(1);">
             <p>L'art de vivre méditerranéen au cœur de Montpellier. Burgers, salades, tapas et gourmandises.</p>
         </div>
         <div class="footer-links">
@@ -921,8 +967,10 @@
         </div>
         <div class="footer-links">
             <h4>Suivez-nous</h4>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
+            <div class="footer-social" style="margin-top: 0;">
+                <a href="#">Fb</a>
+                <a href="#">Ig</a>
+            </div>
         </div>
     </div>
     <div class="footer-bottom">
@@ -939,16 +987,19 @@
 
 <script>
     // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    const navLogo = document.getElementById('navLogoImg');
     window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        const scrolled = window.scrollY > 50;
+        navbar.classList.toggle('scrolled', scrolled);
+        // Switch logo to blue version when scrolled (white bg), white when on hero
+        navLogo.style.filter = scrolled ? 'none' : 'brightness(0) invert(1)';
     });
 
     // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
