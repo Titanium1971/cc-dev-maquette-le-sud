@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Sud Odysseum — Burgers & Salades Méditerranéens | Montpellier</title>
+    <meta name="description" content="Restaurant méditerranéen au cœur d'Odysseum, Montpellier. Burgers artisanaux, salades fraîcheur, tapas & desserts gourmands.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C8A96E;
+            --gold-light: #E8D5A8;
+            --terracotta: #C4704B;
+            --olive: #6B7B3A;
+            --olive-dark: #4A5628;
+            --cream: #FBF7F0;
+            --warm-white: #FEFCF9;
+            --charcoal: #2B2B2B;
+            --text: #3D3D3D;
+            --text-light: #6B6B6B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(43,43,43,0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.7rem 2rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-cta {
+            background: var(--gold) !important;
+            color: var(--charcoal) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 600 !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(200,169,110,0.08)" stroke-width="0.5"/></svg>') center/600px repeat,
+                radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(196,112,75,0.1) 0%, transparent 50%);
+        }
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 2rem;
+            max-width: 900px;
+        }
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeUp 1s ease 0.3s both;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 1s ease 0.5s both;
+        }
+        .hero h1 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeUp 1s ease 0.7s both;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 1s ease 0.9s both;
+        }
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(200,169,110,0.3);
+        }
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        /* ─── CONCEPT ─── */
+        .concept {
+            padding: 8rem 2rem;
+            background: var(--cream);
+        }
+        .concept-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .concept-visual {
+            position: relative;
+        }
+        .concept-img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--terracotta) 0%, var(--gold) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .concept-img-text {
+            color: rgba(255,255,255,0.9);
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            text-align: center;
+            padding: 2rem;
+            line-height: 1.3;
+        }
+        .concept-img::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+        .concept-stats {
+            position: absolute;
+            bottom: -2rem;
+            right: -2rem;
+            background: var(--charcoal);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        .section-tag {
+            display: inline-block;
+            color: var(--terracotta);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .concept-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+        .concept-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        .concept-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .feature-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ─── MENU ─── */
+        .menu {
+            padding: 8rem 2rem;
+            background: var(--warm-white);
+        }
+        .menu-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        .menu-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        .menu-header p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .menu-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .menu-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+        .menu-card-img {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+        .menu-card:nth-child(1) .menu-card-img { background: linear-gradient(135deg, #D4845A, #E8A87C); }
+        .menu-card:nth-child(2) .menu-card-img { background: linear-gradient(135deg, #6B7B3A, #9AB05F); }
+        .menu-card:nth-child(3) .menu-card-img { background: linear-gradient(135deg, #C8A96E, #E8D5A8); }
+        .menu-card:nth-child(4) .menu-card-img { background: linear-gradient(135deg, #8B4A6B, #C27BA0); }
+        .menu-card-body {
+            padding: 1.8rem;
+        }
+        .menu-card-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+            color: var(--charcoal);
+        }
+        .menu-card-body p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .menu-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .btn-dark {
+            background: var(--charcoal);
+            color: #fff;
+        }
+        .btn-dark:hover {
+            background: #444;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ─── AMBIANCE (galerie) ─── */
+        .ambiance {
+            padding: 8rem 2rem;
+            background: var(--charcoal);
+            color: #fff;
+        }
+        .ambiance-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        .ambiance-header .section-tag { color: var(--gold); }
+        .ambiance-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        .ambiance-header p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+        .ambiance-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 250px 250px;
+            gap: 1.5rem;
+        }
+        .ambiance-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+        .ambiance-item:hover { transform: scale(1.02); }
+        .ambiance-item:nth-child(1) {
+            grid-column: 1 / 3;
+            background: linear-gradient(135deg, #1a3a2a, #2d5a3d);
+        }
+        .ambiance-item:nth-child(2) {
+            background: linear-gradient(135deg, #3d2b1f, #6b4c3b);
+        }
+        .ambiance-item:nth-child(3) {
+            background: linear-gradient(135deg, #2b3a4a, #4a6580);
+        }
+        .ambiance-item:nth-child(4) {
+            grid-column: 2 / 4;
+            background: linear-gradient(135deg, #4a3a2a, #7a6a5a);
+        }
+        .ambiance-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .ambiance-item:hover::after { background: rgba(0,0,0,0.1); }
+        .ambiance-item span { z-index: 1; }
+
+        /* ─── AVIS ─── */
+        .reviews {
+            padding: 8rem 2rem;
+            background: var(--cream);
+        }
+        .reviews-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        .reviews-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        .reviews-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .review-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .review-stars {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .review-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.2rem;
+        }
+        .review-author {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+        }
+
+        /* ─── INFOS ─── */
+        .infos {
+            padding: 8rem 2rem;
+            background: var(--warm-white);
+        }
+        .infos-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .infos h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+        .info-block {
+            margin-bottom: 2rem;
+        }
+        .info-block h3 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 0.5rem;
+        }
+        .info-block p, .info-block a {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+        .info-block a:hover { color: var(--terracotta); }
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e8e0d4, #d4cbb8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .map-pin {
+            font-size: 2.5rem;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255,255,255,0.6);
+            padding: 4rem 2rem 2rem;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-brand .nav-logo { font-size: 1.6rem; }
+        .footer-brand p {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+        .footer-links h4 {
+            color: #fff;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        /* ─── BANNER PROSPECTION ─── */
+        .prospect-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--charcoal), #1a1a2e);
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 9999;
+            border-top: 2px solid var(--gold);
+            font-size: 0.9rem;
+        }
+        .prospect-banner strong { color: var(--gold); }
+        .prospect-banner a {
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+            .ambiance-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+            .ambiance-item:nth-child(1),
+            .ambiance-item:nth-child(4) { grid-column: auto; }
+            .ambiance-item { min-height: 200px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                inset: 0;
+                background: rgba(43,43,43,0.98);
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+            }
+            .concept-inner,
+            .infos-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .concept-stats { position: relative; bottom: 0; right: 0; margin-top: 1.5rem; }
+            .menu-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .reviews-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .ambiance-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .concept-text h2,
+            .menu-header h2,
+            .ambiance-header h2,
+            .reviews-header h2,
+            .infos h2 { font-size: 2rem; }
+            .prospect-banner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            body { padding-bottom: 100px; }
+        }
+        @media (min-width: 769px) {
+            body { padding-bottom: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">Le <span>Sud</span></a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#concept">Concept</a></li>
+        <li><a href="#carte">La Carte</a></li>
+        <li><a href="#ambiance">Ambiance</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a href="#infos">Infos</a></li>
+        <li><a href="tel:+33699258256" class="nav-cta">Réserver</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">Odysseum — Montpellier</div>
+        <h1>L'art de vivre<br><em>Méditerranéen</em></h1>
+        <p>Burgers artisanaux, salades ensoleillées et tapas gourmands. Des produits nobles, des recettes inspirées du Sud, une terrasse baignée de lumière.</p>
+        <div class="hero-buttons">
+            <a href="#carte" class="btn btn-primary">Découvrir la Carte</a>
+            <a href="tel:+33699258256" class="btn btn-outline">Réserver une table</a>
+        </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+    <div class="concept-inner">
+        <div class="concept-visual reveal">
+            <div class="concept-img">
+                <div class="concept-img-text">Saveurs<br>du Sud</div>
+            </div>
+            <div class="concept-stats">
+                <div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Produits frais</div>
+                </div>
+                <div>
+                    <div class="stat-number">Local</div>
+                    <div class="stat-label">Circuits courts</div>
+                </div>
+            </div>
+        </div>
+        <div class="concept-text reveal">
+            <div class="section-tag">Notre Concept</div>
+            <h2>Le goût authentique de la Méditerranée</h2>
+            <p>Au Sud, nous célébrons les produits de qualité, la convivialité et l'art de bien manger. Chaque plat est une invitation au voyage, préparé avec des ingrédients frais et locaux sélectionnés avec soin.</p>
+            <p>Nos recettes s'inspirent des traditions méditerranéennes pour vous offrir une expérience culinaire unique dans une ambiance chaleureuse aux accents provençaux.</p>
+            <div class="concept-features">
+                <div class="feature-item"><div class="feature-dot"></div> Ingrédients frais & locaux</div>
+                <div class="feature-item"><div class="feature-dot"></div> Recettes méditerranéennes</div>
+                <div class="feature-item"><div class="feature-dot"></div> Terrasse ensoleillée</div>
+                <div class="feature-item"><div class="feature-dot"></div> À emporter disponible</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="carte">
+    <div class="menu-header reveal">
+        <div class="section-tag">La Carte</div>
+        <h2>Nos créations du Sud</h2>
+        <p>Des recettes généreuses pensées pour ravir tous les palais, du burger gourmand à la salade fraîcheur.</p>
+    </div>
+    <div class="menu-grid">
+        <div class="menu-card reveal">
+            <div class="menu-card-img">🍔</div>
+            <div class="menu-card-body">
+                <h3>Burgers d'Exception</h3>
+                <p>Pain artisanal aux herbes, steaks de bœuf local, légumes grillés au soleil, fromages affinés et sauces maison.</p>
+            </div>
+        </div>
+        <div class="menu-card reveal">
+            <div class="menu-card-img">🥗</div>
+            <div class="menu-card-body">
+                <h3>Salades Fraîcheur</h3>
+                <p>Tomates cerises, olives de Provence, feta onctueuse, huile d'olive première pression à froid.</p>
+            </div>
+        </div>
+        <div class="menu-card reveal">
+            <div class="menu-card-img">🧆</div>
+            <div class="menu-card-body">
+                <h3>Tapas à Partager</h3>
+                <p>Onion rings croustillants, sticks de mozzarella fondants, wings marinées et jalapeños épicés.</p>
+            </div>
+        </div>
+        <div class="menu-card reveal">
+            <div class="menu-card-img">🍰</div>
+            <div class="menu-card-body">
+                <h3>Gourmandises</h3>
+                <p>Pain perdu brioché, big cookie fondant, cheesecake aux fruits rouges et milkshakes généreux.</p>
+            </div>
+        </div>
+    </div>
+    <div class="menu-cta reveal">
+        <a href="#" class="btn btn-dark">Télécharger la Carte Complète</a>
+    </div>
+</section>
+
+<!-- AMBIANCE -->
+<section class="ambiance" id="ambiance">
+    <div class="ambiance-header reveal">
+        <div class="section-tag">L'Expérience</div>
+        <h2>Une ambiance chaleureuse</h2>
+        <p>Un cadre méditerranéen pensé pour savourer chaque instant, entre amis, en famille ou en amoureux.</p>
+    </div>
+    <div class="ambiance-grid reveal">
+        <div class="ambiance-item"><span>Terrasse Ensoleillée</span></div>
+        <div class="ambiance-item"><span>Décor Provençal</span></div>
+        <div class="ambiance-item"><span>Cuisine Ouverte</span></div>
+        <div class="ambiance-item"><span>Ambiance Conviviale</span></div>
+    </div>
+</section>
+
+<!-- AVIS -->
+<section class="reviews" id="avis">
+    <div class="reviews-header reveal">
+        <div class="section-tag">Témoignages</div>
+        <h2>Ce qu'ils en disent</h2>
+    </div>
+    <div class="reviews-grid">
+        <div class="review-card reveal">
+            <div class="review-stars">★★★★★</div>
+            <p>"Les meilleurs burgers de Montpellier, sans hésitation. Les produits sont frais et l'accueil est top !"</p>
+            <div class="review-author">— Sophie M.</div>
+        </div>
+        <div class="review-card reveal">
+            <div class="review-stars">★★★★★</div>
+            <p>"La terrasse est un vrai bonheur. On se croirait en vacances. Les salades sont incroyables."</p>
+            <div class="review-author">— Thomas R.</div>
+        </div>
+        <div class="review-card reveal">
+            <div class="review-stars">★★★★★</div>
+            <p>"Super concept, ambiance chaleureuse et plats généreux. On revient chaque semaine !"</p>
+            <div class="review-author">— Léa D.</div>
+        </div>
+    </div>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section class="infos" id="infos">
+    <div class="infos-inner">
+        <div class="reveal">
+            <div class="section-tag">Pratique</div>
+            <h2>Venez nous voir</h2>
+            <div class="info-block">
+                <h3>Adresse</h3>
+                <p>Centre Commercial Odysseum, Niveau 1<br>2 place de Lisbonne<br>34000 Montpellier</p>
+            </div>
+            <div class="info-block">
+                <h3>Horaires</h3>
+                <p>Lundi — Samedi<br>11h00 — 20h00<br>Petit-déj · Déjeuner · Brunch · Apéro</p>
+            </div>
+            <div class="info-block">
+                <h3>Contact</h3>
+                <p>
+                    <a href="tel:+33699258256">06 99 25 82 56</a><br>
+                    <a href="mailto:contact@lesud-odysseum.fr">contact@lesud-odysseum.fr</a>
+                </p>
+            </div>
+            <div class="info-block">
+                <h3>Réseaux Sociaux</h3>
+                <div class="footer-social" style="margin-top:0.5rem;">
+                    <a href="#">Fb</a>
+                    <a href="#">Ig</a>
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="map-placeholder">
+                <div class="map-pin">📍</div>
+                <div>Centre Commercial Odysseum<br>Montpellier</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="#" class="nav-logo">Le <span>Sud</span></a>
+            <p>L'art de vivre méditerranéen au cœur de Montpellier. Burgers, salades, tapas et gourmandises.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Navigation</h4>
+            <a href="#concept">Concept</a>
+            <a href="#carte">La Carte</a>
+            <a href="#ambiance">Ambiance</a>
+            <a href="#avis">Avis</a>
+            <a href="#infos">Infos pratiques</a>
+        </div>
+        <div class="footer-links">
+            <h4>Suivez-nous</h4>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2025 Le Sud Odysseum. Tous droits réservés.</span>
+        <span>Mentions légales</span>
+    </div>
+</footer>
+
+<!-- BANNER PROSPECTION CC DÉVELOPPEMENT -->
+<div class="prospect-banner">
+    <span><strong>Maquette de refonte</strong> proposée par CC Développement — Cyril Canon</span>
+    <a href="mailto:contact@cc-developpement.fr">Nous contacter</a>
+</div>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
